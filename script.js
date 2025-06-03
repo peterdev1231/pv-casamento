@@ -1,5 +1,11 @@
 // Fonctions exécutées après le chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
+    // Définit l'année actuelle dans le footer
+    const currentYearElement = document.getElementById('currentYear');
+    if (currentYearElement) {
+        currentYearElement.textContent = new Date().getFullYear();
+    }
+
     // Initialiser le compte à rebours
     initCountdown();
     
@@ -277,11 +283,11 @@ function showSocialProofNotification(city) {
     timeElement.textContent = randomTime;
 
     // Afficher la notification
-    notificationElement.classList.add('visible');
+    notificationElement.classList.add('show');
 
     // Masquer la notification après 7 secondes
     setTimeout(() => {
-        notificationElement.classList.remove('visible');
+        notificationElement.classList.remove('show');
     }, 7000);
 }
 
@@ -289,7 +295,7 @@ function showSocialProofNotification(city) {
 function closeSocialProof() {
     const notificationElement = document.getElementById('socialProofNotification');
     if (notificationElement) {
-        notificationElement.classList.remove('visible');
+        notificationElement.classList.remove('show');
     }
 }
 
