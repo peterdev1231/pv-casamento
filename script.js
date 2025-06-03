@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Démarrer le système de notifications basé sur le défilement
     initSocialProofOnScroll();
+    
+    // Initialiser le rastreamento de visualização de seção para o Facebook Pixel
+    initSectionViewTracking();
 });
 
 // Initialise la date de la promotion
@@ -307,3 +310,71 @@ function closeSocialProof() {
 //        console.warn("L'élément 'floating-header' n'a pas été trouvé. Si ce n'est pas intentionnel, vérifiez votre HTML ou la fonction initFloatingHeader.");
 //    }
 // }); 
+
+// Rastreamento de Visualização de Seção para o Facebook Pixel
+function initSectionViewTracking() {
+    const sections = document.querySelectorAll('section[id]');
+    const trackedSectionsFB = new Set(); // Para rastrear seções já vistas pelo Facebook Pixel
+    const trackedSectionsGA4 = new Set(); // Para rastrear seções já vistas pelo GA4
+    const trackedAddToCartGA4 = new Set(); // Para rastrear se o add_to_cart para pricing já foi enviado
+
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.5 // 50% da seção visível
+    };
+
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+
+                // Rastreamento do Facebook Pixel
+                if (typeof fbq !== 'undefined' && !trackedSectionsFB.has(sectionId)) {
+                    fbq('trackCustom', 'ViewSection', { section_id: sectionId });
+                    console.log(`Facebook Pixel: ViewSection - ${sectionId}`);
+                    trackedSectionsFB.add(sectionId);
+                }
+
+                // Rastreamento do GA4 - view_section
+                if (typeof gtag !== 'undefined' && !trackedSectionsGA4.has(sectionId)) {
+                    gtag('event', 'view_section', {
+                        'section_id': sectionId
+                    });
+                    console.log(`GA4: view_section - ${sectionId}`);
+                    trackedSectionsGA4.add(sectionId);
+                }
+
+                // Rastreamento do GA4 - add_to_cart para a seção pricing
+                if (sectionId === 'pricing' && typeof gtag !== 'undefined' && !trackedAddToCartGA4.has(sectionId)) {
+                    gtag('event', 'add_to_cart', {
+                        // Você pode adicionar parâmetros de item aqui se desejar, por exemplo:
+                        // 'currency': 'EUR',
+                        // 'value': 19.90, // Exemplo de valor, ajuste conforme necessário
+                        // 'items': [{
+                        // 'item_id': 'PLAN_COMPLET',
+                        // 'item_name': 'Plan Complet - Mariage Économique'
+                        // }]
+                    });
+                    console.log('GA4: add_to_cart (triggered by viewing pricing section)');
+                    trackedAddToCartGA4.add(sectionId); // Garante que add_to_cart para pricing seja enviado apenas uma vez
+                }
+                
+                // Opcional: parar de observar esta seção após o rastreamento para economizar recursos
+                // if (trackedSectionsFB.has(sectionId) && trackedSectionsGA4.has(sectionId)) {
+                //     if (sectionId === 'pricing' && trackedAddToCartGA4.has(sectionId)) {
+                // observer.unobserve(entry.target);
+                //     } else if (sectionId !== 'pricing') {
+                // observer.unobserve(entry.target);
+                //     }
+                // }
+            }
+        });
+    };
+
+    const sectionObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+} 
