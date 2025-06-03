@@ -457,15 +457,28 @@ p {
     background-color: var(--light-gray);
     padding: 30px;
     border-radius: 10px;
-    margin: 2.5rem auto;
+    margin: 2.5rem auto 1.5rem auto;
     max-width: 800px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .money-burning {
-    font-size: 2.5rem;
-    margin: 2rem 0;
+    font-size: 3rem;
+    margin: 1.5rem auto 3rem auto;
     color: var(--danger);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background-color: var(--light-bg);
+    border-radius: 10px;
+    border: 2px dashed var(--danger);
+    max-width: 400px;
+}
+
+.money-burning i {
+    /* Estilos individuais dos ícones, se necessário */
 }
 
 /* Solution Section */
@@ -1220,7 +1233,12 @@ p {
 
 .price-note {
     font-size: 0.9rem;
-    color: #777;
+    color: #555;
+}
+
+.discount-emphasis {
+  font-weight: 600; /* Um semi-bold, mais sutil que o bold completo */
+  color: var(--success); /* Verde, para conotação positiva da economia */
 }
 
 .pricing-plan .btn {
