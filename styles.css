@@ -1,25 +1,22 @@
-/* Paleta de cores principal */
 :root {
-    --primary-color: #F8C3CD; /* Rosa claro/blush */
-    --primary-color-light: #f8a5b4; /* Nova cor rosa mais viva para fundos */
-    --secondary-color: #D4AF37; /* Dourado */
-    --gold-color: #D4AF37; /* Dourado (mesma cor para consistência nos nomes) */
-    --tertiary-color: #A83E51; /* Rosa escuro/bordô */
-    --light-bg: #FFFBF5; /* Branco/off-white */
-    --light-gray: #F5F5F5; /* Cinza suave */
+    --primary-color: #F8C3CD;
+    --primary-color-light: #f8a5b4;
+    --secondary-color: #D4AF37;
+    --gold-color: #D4AF37;
+    --tertiary-color: #A83E51;
+    --light-bg: #FFFBF5;
+    --light-gray: #F5F5F5;
     --dark-text: #333333;
-    --text-color-dark: #333333; /* Mesmo que dark-text, para consistência */
-    --highlight: #FFF200; /* Amarelo para destaques */
-    --success: #4CAF50; /* Verde para checks */
-    --danger: #FF5252; /* Vermelho para alertas */
+    --text-color-dark: #333333;
+    --highlight: #FFF200;
+    --success: #4CAF50;
+    --danger: #FF5252;
 
-    /* Versões RGB para sombras com alfa */
     --tertiary-color-rgb: 168, 62, 81;
     --success-rgb: 76, 175, 80;
-    --danger-rgb: 255, 82, 82; /* Adicionado RGB para danger */
+    --danger-rgb: 255, 82, 82;
 }
 
-/* Reset e estilos base */
 * {
     margin: 0;
     padding: 0;
@@ -46,7 +43,6 @@ body {
     padding: 0 20px;
 }
 
-/* Tipografia */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
@@ -119,7 +115,6 @@ p {
     line-height: 1.4;
 }
 
-/* Badges */
 .badge {
     display: inline-block;
     padding: 8px 15px;
@@ -177,7 +172,6 @@ p {
     color: white;
 }
 
-/* Botões */
 .btn {
     display: inline-block;
     padding: 15px 30px;
@@ -231,7 +225,6 @@ p {
     }
 }
 
-/* Header */
 .floating-header {
     position: fixed;
     top: 0;
@@ -256,7 +249,6 @@ p {
     color: var(--tertiary-color);
 }
 
-/* Hero Section */
 .hero-section {
     padding: 50px 0 30px;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--light-bg) 100%);
@@ -317,7 +309,6 @@ p {
     }
 }
 
-/* Subheadline Alert Style */
 .subheadline-alert {
     background-color: white;
     padding: 25px;
@@ -337,7 +328,6 @@ p {
     margin-bottom: 1rem;
 }
 
-/* About Me Section */
 .about-me-section {
     padding: 60px 0;
     background-color: var(--light-bg);
@@ -421,7 +411,6 @@ p {
     color: var(--tertiary-color);
 }
 
-/* Problem Section */
 .problem-section {
     padding: 20px 0 60px;
     background-color: white;
@@ -477,11 +466,8 @@ p {
     max-width: 400px;
 }
 
-.money-burning i {
-    /* Estilos individuais dos ícones, se necessário */
-}
+.money-burning i {}
 
-/* Solution Section */
 .solution-section {
     padding: 60px 0;
     background: linear-gradient(to bottom, var(--primary-color) 0%, var(--light-bg) 100%);
@@ -539,7 +525,6 @@ p {
     margin: 3rem 0 1rem;
 }
 
-/* Authority Section */
 .authority-section {
     padding: 60px 0;
     background-color: var(--light-gray);
@@ -610,7 +595,6 @@ p {
     line-height: 1.75;
 }
 
-/* Product Section */
 .product-section {
     padding: 60px 0;
     background: linear-gradient(45deg, var(--secondary-color) 0%, rgba(212, 175, 55, 0.1) 100%);
@@ -699,7 +683,6 @@ p {
     text-align: left;
 }
 
-/* Benefits Section */
 .benefits-section {
     padding: 60px 0;
     background-color: white;
@@ -815,7 +798,6 @@ p {
     margin-right: 10px;
 }
 
-/* Testimonials Section */
 .testimonials-section {
     padding: 60px 0;
     background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-gray) 100%);
@@ -902,7 +884,6 @@ p {
     margin-bottom: 0;
 }
 
-/* Bonus Section */
 .bonus-section {
     padding: 80px 0;
     background-color: var(--light-gray);
@@ -955,13 +936,11 @@ p {
     line-height: 1.6;
 }
 
-/* Estilo para o destaque do último dia da promoção */
 .promo-dates-text .promo-final-day-highlight {
-    color: var(--danger); /* Vermelho para destaque */
-    font-weight: 700; /* Negrito */
+    color: var(--danger);
+    font-weight: 700;
 }
 
-/* Estilo para a data final da promoção no countdown (caso seja usada em .current-date separadamente) */
 .bonus-countdown .promo-ends-text .current-date {
     color: var(--danger);
     font-weight: 700;
@@ -1123,7 +1102,6 @@ p {
     text-transform: uppercase;
 }
 
-/* Pricing Section */
 .pricing-section {
     padding: 60px 0;
     background: linear-gradient(45deg, var(--light-bg) 0%, var(--primary-color) 100%);
@@ -1237,8 +1215,8 @@ p {
 }
 
 .discount-emphasis {
-  font-weight: 600; /* Um semi-bold, mais sutil que o bold completo */
-  color: var(--success); /* Verde, para conotação positiva da economia */
+  font-weight: 600;
+  color: var(--success);
 }
 
 .pricing-plan .btn {
@@ -1246,7 +1224,6 @@ p {
     width: 100%;
 }
 
-/* Guarantee Section */
 .guarantee-section {
     padding: 60px 0;
     background: linear-gradient(135deg, var(--light-bg) 0%, var(--primary-color) 20%, var(--light-bg) 100%);
@@ -1386,7 +1363,6 @@ p {
     color: var(--success);
 }
 
-/* FAQ Section */
 .faq-section {
     padding: 60px 0;
     background-color: white;
@@ -1454,23 +1430,22 @@ p {
     line-height: 1.75;
 }
 
-/* CTA Final Section */
 .cta-final-section {
     background: linear-gradient(135deg, var(--tertiary-color) 0%, var(--primary-color) 100%);
-    color: #fff; /* Texto branco para contraste */
+    color: #fff;
     padding: 80px 20px;
     text-align: center;
 }
 
 .cta-final-section .section-headline {
-    color: var(--gold-color); /* Dourado para o título principal */
+    color: var(--gold-color);
     font-size: 2.8em;
     margin-bottom: 15px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .cta-final-section .section-subheadline {
-    color: #fff; /* Branco puro para melhor contraste */
+    color: #fff;
     font-size: 1.6em;
     margin-bottom: 40px;
     font-weight: 600;
@@ -1481,18 +1456,18 @@ p {
     font-size: 1.1em;
     line-height: 1.7;
     margin-bottom: 20px;
-    color: #fff; /* Branco para parágrafos - melhor contraste */
+    color: #fff;
 }
 
 .cta-final-content .bold-text {
-    color: #fff; /* Branco puro para texto em negrito */
+    color: #fff;
     font-weight: 700;
     text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .cta-path-option {
-    background-color: rgba(0,0,0,0.2); /* Mais escuro para contraste */
-    border: 1px solid rgba(255,255,255,0.3); /* Borda mais visível */
+    background-color: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
     padding: 30px;
     border-radius: 10px;
     margin-bottom: 30px;
@@ -1515,7 +1490,7 @@ p {
 }
 
 .cta-path-option.path-smart h4 i {
-    color: #ffeb3b; /* Amarelo para o ícone de lâmpada */
+    color: #ffeb3b;
 }
 
 .cta-separator {
@@ -1530,7 +1505,7 @@ p {
 .cta-separator hr {
     flex-grow: 1;
     border: none;
-    border-top: 2px solid rgba(255,255,255,0.5); /* Linhas mais visíveis */
+    border-top: 2px solid rgba(255,255,255,0.5);
 }
 
 .cta-separator span {
@@ -1538,9 +1513,9 @@ p {
     font-size: 2.2em;
     font-weight: 800;
     color: var(--gold-color);
-    background: linear-gradient(135deg, var(--tertiary-color) 0%, var(--primary-color) 100%); /* Mesmo gradiente do fundo */
+    background: linear-gradient(135deg, var(--tertiary-color) 0%, var(--primary-color) 100%);
     position: relative;
-    top: -2px; /* Ajuste fino de alinhamento vertical */
+    top: -2px;
     border-radius: 30px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -1548,8 +1523,8 @@ p {
 }
 
 .cta-final-box {
-    background-color: #fff; /* Fundo branco para o box principal */
-    color: var(--text-color-dark); /* Texto escuro para contraste */
+    background-color: #fff;
+    color: var(--text-color-dark);
     padding: 40px;
     border-radius: 15px;
     border: 3px solid var(--gold-color);
@@ -1571,7 +1546,7 @@ p {
 }
 
 .cta-final-box p {
-    color: var(--text-color-dark); /* Ajusta cor dos parágrafos dentro do box */
+    color: var(--text-color-dark);
     font-size: 1.15em;
 }
 
@@ -1594,7 +1569,7 @@ p {
 }
 
 .cta-final-benefits li i {
-    color: var(--secondary-color); /* Cor bordô para os ícones */
+    color: var(--secondary-color);
     margin-right: 15px;
     font-size: 1.3em;
 }
@@ -1606,7 +1581,7 @@ p {
 
 .cta-final-timer p {
     font-size: 1.3em;
-    color: #fff; /* Texto branco para o aviso do timer */
+    color: #fff;
     font-weight: 600;
     margin-bottom: 15px;
     text-shadow: 0 1px 3px rgba(0,0,0,0.3);
@@ -1614,7 +1589,7 @@ p {
 
 .countdown-display {
     display: flex;
-    flex-direction: column; /* Organiza em coluna para melhor visualização */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -1626,7 +1601,7 @@ p {
 }
 
 .countdown-display span {
-    font-size: 1.15em; /* Tamanho ajustado para o texto "Oferta expira em:" */
+    font-size: 1.15em;
     color: #fff;
     margin-bottom: 10px;
     font-weight: 600;
@@ -1635,7 +1610,7 @@ p {
 }
 
 .countdown-timer-large {
-    font-size: 3.8em; /* Tamanho aumentado para o contador */
+    font-size: 3.8em;
     font-weight: 900;
     color: var(--gold-color);
     letter-spacing: 3px;
@@ -1658,7 +1633,7 @@ p {
 .cta-final-section .btn-huge {
     padding: 20px 40px;
     font-size: 1.5em;
-    background: linear-gradient(to right, var(--secondary-color), #ebc850, var(--secondary-color)); /* Gradiente dourado mais rico */
+    background: linear-gradient(to right, var(--secondary-color), #ebc850, var(--secondary-color));
     border: none;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
@@ -1688,7 +1663,6 @@ p {
     transform: rotate(30deg) translate(10%, 10%);
 }
 
-/* Animações de entrada */
 .fade-in {
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
@@ -1731,7 +1705,6 @@ p {
     transform: translateX(0);
 }
 
-/* Footer */
 footer {
     background-color: var(--dark-text);
     color: white;
@@ -1746,7 +1719,6 @@ footer {
     color: #aaa;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .main-headline {
         font-size: 1.8rem;
@@ -1824,7 +1796,6 @@ footer {
     }
 }
 
-/* Notificação de prova social */
 .social-proof-notification {
     position: fixed;
     bottom: 20px;
