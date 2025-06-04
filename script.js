@@ -157,26 +157,26 @@ function initScrollAnimations() {
 // Configure la date de la promotion pour que le dernier jour soit AUJOURD'HUI.
 function setDynamicPromoDate() {
     const promoTextElements = document.querySelectorAll('.promo-dates-text');
-    // const countdownDateElements = document.querySelectorAll('.current-date'); // Non utilisé actuellement
+    // const countdownDateElements = document.querySelectorAll('.current-date'); // Not currently used
 
     const today = new Date();
-    // S'assurer que la locale est française pour l'affichage des dates
-    const dayFormatter = new Intl.DateTimeFormat('fr-FR', { day: 'numeric' });
-    const monthFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'long' });
+    // Ensure the locale is English for date display
+    const dayFormatter = new Intl.DateTimeFormat('en-US', { day: 'numeric' });
+    const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long' });
 
     const todayFormatted = `${dayFormatter.format(today)} ${monthFormatter.format(today)}`;
 
     if (promoTextElements.length > 0) {
-        // Traduction et ajustement du texte de la promotion
+        // Translation and adjustment of the promotion text
         const dynamicDateHTML = 
-            `expirent <span class="promo-final-day-highlight">AUJOURD'HUI, ${todayFormatted}</span>`;
+            `expire <span class="promo-final-day-highlight">TODAY, ${todayFormatted}</span>`;
         
         promoTextElements.forEach(element => {
             element.innerHTML = dynamicDateHTML;
         });
     }
 
-    // Mettre à jour .current-date si jamais utilisé (pas trouvé dans le HTML actuel pour cette fonctionnalité)
+    // Update .current-date if ever used (not found in current HTML for this feature)
     // if (countdownDateElements.length > 0) {
     //     countdownDateElements.forEach(el => el.textContent = todayFormatted);
     // }
@@ -187,33 +187,33 @@ function initSocialProofOnScroll() {
     const productSection = document.getElementById('product');
     if (!productSection) return;
 
-    let notificationsStarted = false; // Drapeau pour s'assurer que les notifications ne démarrent qu'une fois
+    let notificationsStarted = false; // Flag to ensure notifications only start once
 
     const checkProductSectionVisibility = () => {
-        if (notificationsStarted) return; // Si déjà démarré, ne rien faire
+        if (notificationsStarted) return; // If already started, do nothing
 
         const sectionTop = productSection.getBoundingClientRect().top;
         const sectionBottom = productSection.getBoundingClientRect().bottom;
         const viewportHeight = window.innerHeight;
 
-        // Si la section est au moins partiellement visible dans la fenêtre d'affichage
+        // If the section is at least partially visible in the viewport
         if (sectionTop < viewportHeight && sectionBottom > 0) {
-            // Démarrer les notifications
+            // Start notifications
             getUserCity();
-            notificationsStarted = true; // Mettre le drapeau à vrai
-            // Supprimer cet écouteur après la première activation pour éviter les démarrages multiples
+            notificationsStarted = true; // Set flag to true
+            // Remove this listener after the first activation to prevent multiple starts
             window.removeEventListener('scroll', checkProductSectionVisibility);
-            console.log('Notifications de preuve sociale démarrées.');
+            console.log('Social proof notifications started.');
         }
     };
 
-    // Vérifier la visibilité au chargement (au cas où la section serait déjà visible)
+    // Check visibility on load (in case the section is already visible)
     checkProductSectionVisibility();
-    // Ajouter un écouteur pour vérifier lors du défilement
+    // Add listener to check on scroll
     window.addEventListener('scroll', checkProductSectionVisibility, { passive: true });
 }
 
-// Fonction pour obtenir la ville de l'utilisateur par IP
+// Function to get user's city by IP
 function getUserCity() {
     fetch('https://ipapi.co/json/')
         .then(response => response.json())
@@ -221,80 +221,83 @@ function getUserCity() {
             if (data && data.city) {
                 startSocialProofNotifications(data.city);
             } else {
-                // Ville par défaut si impossible à obtenir
-                startSocialProofNotifications('Paris');
+                // Default city if unable to get
+                startSocialProofNotifications('New York'); // Changed default to a US city
             }
         })
         .catch(error => {
-            console.error('Erreur lors de l\'obtention de la localisation:', error);
-            // Utiliser la ville par défaut en cas d'erreur
-            startSocialProofNotifications('Paris');
+            console.error('Error fetching location:', error);
+            // Use default city in case of error
+            startSocialProofNotifications('New York'); // Changed default to a US city
         });
 }
 
-// Liste de prénoms féminins communs (déjà en français)
+// List of common female names in the US
 const femaleNames = [
-    'Marie Dubois', 'Sophie Bernard', 'Claire Garcia', 'Anne Martin',
-    'Nathalie Petit', 'Isabelle Thomas', 'Caroline Robert', 'Stéphanie Duval',
-    'Sandrine Moreau', 'Virginie Laurent', 'Émilie Roussel', 'Laurence Nicolas',
-    'Valérie Garnier', 'Christine Faure', 'Sylvie Lefevre', 'Françoise Andre',
-    'Catherine Leroy', 'Martine Roux', 'Véronique Simon', 'Agnès Lambert'
+    'Mary Smith', 'Patricia Johnson', 'Jennifer Williams', 'Linda Brown',
+    'Elizabeth Jones', 'Barbara Garcia', 'Susan Miller', 'Jessica Davis',
+    'Sarah Rodriguez', 'Karen Martinez', 'Nancy Hernandez', 'Lisa Lopez',
+    'Betty Gonzalez', 'Dorothy Wilson', 'Sandra Anderson', 'Ashley Thomas',
+    'Kimberly Taylor', 'Donna Moore', 'Emily Martin', 'Michelle Jackson',
+    'Amanda Lee', 'Melissa Perez', 'Deborah Thompson', 'Stephanie White', 
+    'Laura Harris', 'Rebecca Clark', 'Sharon Lewis', 'Cynthia Robinson',
+    'Kathleen Walker', 'Amy Young', 'Shirley Allen', 'Angela King'
 ];
 
-// Liste des périodes (traduites en français)
+// List of time periods (translated to English)
 const timePeriods = [
-    'il y a 1 minute',
-    'il y a 2 minutes',
-    'il y a 5 minutes',
-    'il y a 7 minutes',
-    'il y a 12 minutes',
-    'il y a 15 minutes',
-    'il y a 20 minutes',
-    'il y a 30 minutes',
-    'il y a quelques minutes'
+    '1 minute ago',
+    '2 minutes ago',
+    '5 minutes ago',
+    '7 minutes ago',
+    '12 minutes ago',
+    '15 minutes ago',
+    '20 minutes ago',
+    '30 minutes ago',
+    'a few minutes ago'
 ];
 
-// Fonction pour démarrer les notifications de preuve sociale
+// Function to start social proof notifications
 function startSocialProofNotifications(city) {
-    // Afficher la première notification après 10 secondes
+    // Show first notification after 10 seconds
     setTimeout(() => showSocialProofNotification(city), 10000);
 
-    // Afficher les notifications suivantes toutes les 20 à 35 secondes
+    // Show subsequent notifications every 20 to 35 seconds
     setInterval(() => {
         showSocialProofNotification(city);
-    }, Math.random() * 15000 + 20000); // Intervalle aléatoire entre 20s et 35s
+    }, Math.random() * 15000 + 20000); // Random interval between 20s and 35s
 }
 
-// Fonction pour afficher une notification de preuve sociale
+// Function to display a social proof notification
 function showSocialProofNotification(city) {
     const notificationElement = document.getElementById('socialProofNotification');
     const messageElement = document.getElementById('notificationMessage');
     const timeElement = document.getElementById('notificationTime');
 
     if (!notificationElement || !messageElement || !timeElement) {
-        console.error('Éléments de notification non trouvés.');
+        console.error('Notification elements not found.');
         return;
     }
 
-    // Choisir un nom, un message et une période aléatoires
+    // Choose a random name, message, and time period
     const randomName = femaleNames[Math.floor(Math.random() * femaleNames.length)];
     const randomTime = timePeriods[Math.floor(Math.random() * timePeriods.length)];
     
-    // Construire le message
-    // Exemple : "Virginie Laurent de Paris vient d'acquérir son Protocole de mariage économique 7k"
-    messageElement.textContent = `${randomName} de ${city} vient d'acquérir son Protocole de mariage économique 7k.`;
+    // Construct the message in English
+    // Example: "Jennifer Williams from New York just got her ECONOMICAL MARRIAGE PROTOCOL 7K."
+    messageElement.textContent = `${randomName} from ${city} just got their ECONOMICAL MARRIAGE PROTOCOL 7K.`;
     timeElement.textContent = randomTime;
 
-    // Afficher la notification
+    // Display the notification
     notificationElement.classList.add('show');
 
-    // Masquer la notification après 7 secondes
+    // Hide the notification after 7 seconds
     setTimeout(() => {
         notificationElement.classList.remove('show');
     }, 7000);
 }
 
-// Fonction pour fermer la notification de preuve sociale (appelée par le bouton 'x')
+// Function to close the social proof notification (called by the 'x' button)
 function closeSocialProof() {
     const notificationElement = document.getElementById('socialProofNotification');
     if (notificationElement) {
@@ -307,21 +310,21 @@ function closeSocialProof() {
 // document.addEventListener('DOMContentLoaded', function() {
 //    const floatingHeader = document.getElementById('floating-header');
 //    if (!floatingHeader) {
-//        console.warn("L'élément 'floating-header' n'a pas été trouvé. Si ce n'est pas intentionnel, vérifiez votre HTML ou la fonction initFloatingHeader.");
+//        console.warn("Element 'floating-header' not found. If not intentional, check your HTML or initFloatingHeader function.");
 //    }
 // }); 
 
 // Rastreamento de Visualização de Seção para o Facebook Pixel
 function initSectionViewTracking() {
     const sections = document.querySelectorAll('section[id]');
-    const trackedSectionsFB = new Set(); // Para rastrear seções já vistas pelo Facebook Pixel
-    const trackedSectionsGA4 = new Set(); // Para rastrear seções já vistas pelo GA4
-    const trackedAddToCartGA4 = new Set(); // Para rastrear se o add_to_cart para pricing já foi enviado
+    const trackedSectionsFB = new Set(); // To track sections already viewed by Facebook Pixel
+    const trackedSectionsGA4 = new Set(); // To track sections already viewed by GA4
+    const trackedAddToCartGA4 = new Set(); // To track if add_to_cart for pricing has already been sent
 
     const observerOptions = {
         root: null, // viewport
         rootMargin: '0px',
-        threshold: 0.5 // 50% da seção visível
+        threshold: 0.5 // 50% of the section visible
     };
 
     const observerCallback = (entries, observer) => {
@@ -329,14 +332,14 @@ function initSectionViewTracking() {
             if (entry.isIntersecting) {
                 const sectionId = entry.target.id;
 
-                // Rastreamento do Facebook Pixel
+                // Facebook Pixel Tracking
                 if (typeof fbq !== 'undefined' && !trackedSectionsFB.has(sectionId)) {
                     fbq('trackCustom', 'ViewSection', { section_id: sectionId });
                     console.log(`Facebook Pixel: ViewSection - ${sectionId}`);
                     trackedSectionsFB.add(sectionId);
                 }
 
-                // Rastreamento do GA4 - view_section
+                // GA4 Tracking - view_section
                 if (typeof gtag !== 'undefined' && !trackedSectionsGA4.has(sectionId)) {
                     gtag('event', 'view_section', {
                         'section_id': sectionId
@@ -345,7 +348,7 @@ function initSectionViewTracking() {
                     trackedSectionsGA4.add(sectionId);
                 }
 
-                // Rastreamento do GA4 - add_to_cart para a seção pricing
+                // GA4 Tracking - add_to_cart for pricing section
                 if (sectionId === 'pricing' && typeof gtag !== 'undefined' && !trackedAddToCartGA4.has(sectionId)) {
                     gtag('event', 'add_to_cart', {
                         // Você pode adicionar parâmetros de item aqui se desejar, por exemplo:
